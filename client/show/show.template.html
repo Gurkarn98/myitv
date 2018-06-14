@@ -6,7 +6,7 @@
     <div ng-if="$ctrl.episodes.length>0" class="episode-group" ng-repeat="episode in $ctrl.episodes">
       <p class="episode" ng-click="$ctrl.select(episode)" ui-sref="episode({episode:episode.date,show:$ctrl.show.name,channel:$ctrl.channel})">{{episode.date}}</p>
     </div>
-    <div style="margin: 5%;" ng-if="$ctrl.episodes.length===0" class="episode-group" >
+    <div style="margin: 5%;" ng-if="$ctrl.showError" class="episode-group" >
       <p class="episode-error" >Sorry, No episode Availabe Yet, or an error occured. Please contact staff if show is already released and no episode is available.</p>
     </div>
   </div>
