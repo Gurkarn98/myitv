@@ -1,0 +1,2 @@
+<iframe id="iframe" adblock ng-if="!$ctrl.error" ng-src="{{trustSrc($ctrl.video)}}" sandbox="allow-scripts allow-same-origin" allowfullscreen></iframe>
+<h1 ng-if="$ctrl.error" class="text-center">{{$ctrl.error}}</h1>
