@@ -5,7 +5,8 @@ angular
     controller:function($stateParams, channelService, $scope, $http){
       var self = this
       self.channel = decodeURIComponent($stateParams.channel)
-      self.episode = undefined;
+      self.episodes = undefined;
+      self.showError = false;
       $scope.$watch(function(){
         return channelService.channels
       }, function (newVal, oldVal){
@@ -34,6 +35,11 @@ angular
       }, function (newVal, oldVal){
         if (newVal){
           self.episodes = channelService.episodeList
+        }
+        if (self.episodes.length===0 || self.episodes === undefined){
+          self.showError = true;
+        }  else {
+          self.showError = false;
         }
       })
       self.select=function(episode){
