@@ -1,0 +1,13 @@
+<div class="text-center">
+  <div  class="text-center">
+    <div class="logo">
+      <img style="display: min-width: 75px; min-height:75px; margin: 25px auto 25px auto" ng-src="{{$ctrl.shows.channel.logo}}">
+    </div>
+    <p>{{$ctrl.shows.channel.name}}</p>
+  </div>
+  <div class="shows">
+    <div ui-sref="show({channel:$ctrl.shows.channel.name,show:show.name})" ng-click="$ctrl.select(show)" ng-if="show.name.indexOf('Award') < 0" ng-repeat="show in $ctrl.shows.shows">
+      <p>{{show.name}}</p>
+    </div>
+  </div>
+</div>

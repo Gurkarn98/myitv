@@ -1,0 +1,30 @@
+<div  class="text-center">
+  <h2>{{$ctrl.show.name}}</h2>
+  <h3>{{$ctrl.episode.date}}</h3>
+</div>
+<div class="text-center row">
+  <div class="shows col-sm-4">
+    <div ng-if="link.name !== 'Embed Upload'" ng-repeat="link in $ctrl.links">
+      <h5>{{link.name}}</h5>
+      <p ui-sref="episode.video" ng-click="$ctrl.select(link.provider, href, link.name, link)" class="source" ng-repeat="href in link.link">{{link.link.length===1?link.name+' Full Part':link.name+' Part '+(link.link.indexOf(href)+1)}}</p>
+    </div>
+  </div>
+  <div class="view-container col-sm-8">
+    <div class="text-center outer-box">
+      <div class="text-center box">
+        <div class="group">
+          <div class="part">
+            <h5>{{$ctrl.selected.name}}</h5>
+            <p ui-sref="episode.video" ng-click="$ctrl.selectPart($ctrl.selected.provider, href, $ctrl.selected.name)" class="source" ng-repeat="href in $ctrl.selected.link">{{$ctrl.selected.link.length===1?$ctrl.selected.name+' Full Part':$ctrl.selected.name+' Part '+($ctrl.selected.link.indexOf(href)+1)}}</p>
+          </div>
+          <div class="text-center outer-box">
+            <div class="text-center video-box">
+              <div ui-view class="video view-frame">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

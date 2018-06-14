@@ -1,0 +1,8 @@
+<div class="text-center">
+  <div ui-sref="shows({channel:channel.channel.name})" ng-if="channel.channel.logo" class="channels" ng-repeat="channel in $ctrl.channels">
+    <div  class="text-center">
+      <img style="display: min-width: 75px; min-height:75px; margin: 25px auto 25px auto" ng-src="{{channel.channel.logo}}">
+      <p>{{channel.channel.name}}</p>
+    </div>
+  </div>
+</div>
