@@ -1,0 +1,201 @@
+//   app.get("/image",(req,res)=>{
+//     Tesseract.recognize({image: __dirname+"/image.png"})
+//     .then(function(result){
+//         console.log(result)
+//     })  
+//   })
+//   app.get("/createTVList*", (req, res) => {
+//     var password = "kmzMqT9QL3";
+//     var email = "GuMEZGfupG";
+//     var links = [
+//       "http://swiftstreamz.com/SwiftLive/api.php?cat_id=31",
+//       "http://swiftstreamz.com/SwiftLive/api.php?cat_id=21",
+//       "http://swiftstreamz.com/SwiftLive/api.php?cat_id=42",
+//       "http://swiftstreamz.com/SwiftLive/api.php?cat_id=53",
+//       "http://swiftstreamz.com/SwiftLive/api.php?cat_id=41",
+//     ]
+//     var m3u = "#EXTM3U \n";
+//     var counter = 0;
+//     for (var i = 0; i<links.length; i++){
+//       getData(i)
+//     }
+//     function getData (i){
+//       if (links[i] !== "" && links[i] !== undefined && url.parse(links[i]).host){
+//         http.get(links[i], function (response){
+//           var body="";
+//           response.setEncoding("utf8")
+//           response.on("data", data=>{
+//             body+=data;    
+//           })
+//           response.on('end', ()=>{
+//             parseString(body, function (err, result) {
+//               var channels = result;
+//               // for (var i = 1; i< channels.length; i++) {
+//               //   if (channels[i].category_id[0]==="31"){
+//               //     var category = "Punjabi";
+//               //   } else if (channels[i].category_id[0]==="21") {
+//               //     var category = "India";
+//               //   } else if (channels[i].category_id[0]==="42") {
+//               //     var category = "United Kingdom";
+//               //   } else if (channels[i].category_id[0]==="53") {
+//               //     var category = "Italy";
+//               //   } else if (channels[i].category_id[0]==="41") {
+//               //     var category = "United States";
+//               //   }
+//               // }
+//               counter++
+//               if (counter === links.length) {
+//                 DB.update({_id:"channels"}, {"channels":m3u}, function(err){
+//                   if (err) throw err;
+//                 })
+//                 //res.set({"Content-Type": "text/plain"})
+//                 res.send(JSON.parse(body))
+//               }
+//             });
+//           })
+//         })
+//       } else {
+//         counter++;
+//         if (counter === links.length){
+//           DB.update({_id:"channels"}, {"channels":m3u}, function(err){
+//             if (err) throw err;
+//           })
+//           res.set({"Content-Type": "text/plain"})
+//           res.send(m3u)
+//         }
+//       }
+//     }
+//     //var link = "http://ok2.se:8000/panel_api.php?username="+email+"&password="+password;
+//     // var link = "http://buyiptv.link:25461/panel_api.php?username="+email+"&password="+password;
+//     // http.get("http://buyiptv.link:25461/enigma2.php?username=GuMEZGfupG&password=kmzMqT9QL3&type=get_live_streams&cat_id=61", function (response){
+//     //   response.setEncoding("utf8");
+//     //   var body=""
+//     //   response.on('data', data=>{body+=data})
+//     //   response.on("end", ()=>{
+//     //     parseString(body, function (err, result) {
+//     //       var channels = result.items.channel;
+//     //       channel
+//     //     });
+//     //   })
+//     // })
+//     // http.get(link, function (response){
+//     //   response.setEncoding("utf8");
+//     //   var body = "";
+//     //   response.on('data', data=>{body+=data})
+//     //   response.on("end", ()=>{
+//     //     body = JSON.parse(body)
+//     //     server = body.server_info
+//     //     body = body.available_channels
+//     //     var output ="#EXTM3U \n";
+//     //     var objects = Object.keys(body);
+//     //     for (var i = 0; i< objects.length; i++) {
+//     //       if (body[objects[i]].category_name != "FOR ADULTS" && body[objects[i]].category_name != "ADULT XXX" && body[objects[i]].stream_type != "movie") {
+//     //         output+='#EXTINF:-1 tvg-ID="" tvg-name="'+body[objects[i]].name
+//     //         //output+='" tvg-logo="'+(body[objects[i]].stream_icon.length<200?body[objects[i]].stream_icon:"")
+//     //         output+='" group-title="'+body[objects[i]].category_name+'",'
+//     //         output+=body[objects[i]].name+'\nhttp://'+server.url+':'+server.port+'/live/'+email+'/'+password+'/'+objects[i]+'.ts\n'
+//     //         //output+=body[objects[i]].name+'\nhttp://ok2.se/live/'+email+'/'+password+'/'+objects[i]+'.ts\n'
+//     //       }
+//     //     }
+//     //     channels.update({_id:"channels"}, {"channels":output}, function(err){
+//     //       if (err) throw err;
+//     //     })
+//     //     res.set({"Content-Type": "text/plain"})
+//     //     res.send(output)
+//     //   })
+//     // })
+//   })
+//   app.get("/getTvList", (req, res)=>{
+//     DB.find({_id:"channels"}).toArray((err, data)=>{
+//       if (err) throw err;
+//       fs.writeFile(__dirname+"/tv_channels.m3u", data[0].channels, (err)=>{
+//         if (err) throw err;
+//         res.sendFile(__dirname+"/tv_channels.m3u")
+//       })
+//   //    res.set({"Content-Type": "text/plain"})
+//   //    res.send(data[0].channels)
+//     })
+//   })
+//   app.get("/img.png", (request, response) => {
+//     response.sendFile(__dirname + '/client/img.png')
+//   })
+//   app.get("/getNewTrial", (req, res)=>{
+//     var form={
+//       "trialname": "Gsk",
+//       "trialemail": "gurkarn98@gmail.com",
+//       "newsletter": "Yes"
+//     }
+//     form = JSON.stringify(form)
+//     var options={
+//       //url: 'https://iptv-quality.com/index.php?p=4',
+//       //url: "http://portal.geniptv.com:8080/get.php?username=gurkarn@mail.com&password=CR37Wb7w1f&type=m3u&output=ts",
+//       url: "http://swiftstreamz.com/SwiftLive/api.php?cat_id=31",
+//       method: 'POST',
+//       //https://kong-tatasky.videoready.tv/portal-search/pub/api/v1/channels/schedule?date=&languageFilters=&genreFilters=&limit=500&offset=0
+//       //body: form
+//     }
+//     request(options, (err, response, body)=>{
+//       response.setEncoding("utf8")
+//       // res.set({"Content-Type": "text/plain"})
+//       // body = body.replace(/\n/g, "").replace(/\r/g, "")
+//       // body = body.match(/#EXTINF:-1,#+(\s)*?INDIA.*?#EXTINF:-1,#/gi)[0]
+//       // body = body.replace(/http/g, "\rhttp").replace(/#EXTINF:-1,/g,"\r#EXTINF:-1,")
+//       // body = body.split("\r")
+//       // body.splice(body.length-1)
+//       // body = body.join("\r")
+//       // res.send("#EXTM3U"+body)
+//       res.send(body)
+  
+//     })
+//     // res.sendFile(__dirname + '/client/newTrial.html')
+//     // http.request(options, (response)=>{
+//     //   console.log(`STATUS: ${res.statusCode}`);
+//     //   console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
+//     //   response.setEncoding("utf8");
+//     //   var body = "";
+//     //   response.on('data', data=>{body+=data; console.log(`BODY: ${data}`);})
+//     //   response.on("end", ()=>{
+//     //     res.send(body)
+//     //   })
+//     // })
+//   })
+//   app.get("/getTrial", (req, res)=>{
+//     var form={
+//       "PHPSESSID": "r46lpb4tthsb77ngriq7am04m",
+//       "action": "verify",
+//       "activepage":1,
+//       "control33656032":"myname",
+//       "control33656033":"myemail",
+//       "control33656034":"6 Hours Full Package (Free)",
+//       "control33656035":"M3U for VLC and KODI",
+//       "control33656036":"",
+//       "control33656037":"country",
+//       "email":"",
+//       "f_autoresponder":"64969",
+//       "go_back_and_edit":"0",
+//       "hiddenfields":"",
+//       "hiddenfields_pages":"",
+//       "language":"en",
+//       "languageChanged":"no",
+//       "nextpagenr":"2",
+//       "prevpagenr":"0",
+//       "qualityscore":"724237961",
+//       "special_autoresponder":"",
+//       "submXMLDatetimeStart":"2018-06-26 09:53:57",
+//       "submissionUniqueId":"pending_5b32457524671",
+//       "tmp_form_host":"https://www.iptvservergate.com/iptvserver-freetest/index.html",
+//       "tmp_referer":"https://www.iptvservergate.com/iptvserver-freetest/",
+//       "totalpages":"1",
+//       "txtNumber":"captchacode",
+//       "viewformr":"cfr_1530020613.9583"
+//     }
+//     form = JSON.stringify(form)
+//     var options={
+//       url: "http://www.123formbuilder.com/js-form-username-3060222.html?ref=http%3A%2F%2Flocalhost%2FgetTrial&_referrer_=&_embedType_=embed.js&_iframeID_=1530024409387_61198598121845",
+//       method: 'get',
+//     }
+//     request(options, (err, response, body)=>{
+//       response.setEncoding("utf8")
+//       res.send(body)
+//     })
+//   })
